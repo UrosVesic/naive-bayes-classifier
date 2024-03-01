@@ -1,0 +1,9 @@
+services:
+  mydb:
+    image: mysql:8.0.31
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clojure
+    ports:
+      - "3306:3306"
+    restart: always

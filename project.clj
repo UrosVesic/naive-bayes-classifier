@@ -8,7 +8,10 @@
                  [ring "1.9.0"]
                  [javax.servlet/servlet-api "2.5"]
                  [metosin/reitit "0.7.0-alpha7"]
-                 [metosin/muuntaja "0.6.8"]]
+                 [metosin/muuntaja "0.6.8"]
+                 [org.clojure/java.jdbc "0.7.12"]
+                 [mysql/mysql-connector-java "8.0.33"]
+                 [com.github.seancorfield/honeysql "2.5.1103"]]
   :main ^:skip-aot bayes.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
