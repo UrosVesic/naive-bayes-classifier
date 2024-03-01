@@ -15,6 +15,7 @@
       {:body {:prediction prediction}}
       {:status 400
        :body {:error "Email text is missing"}})))
+
 (defn save-email-handler [{:keys [body-params]}]
   (let [{:keys [sender receiver subject content]} body-params]
     (if (and sender receiver subject content)
@@ -26,16 +27,15 @@
 
 (defn get-emails-handler [{:keys [path-params]}]
   (let [receiver (:receiver path-params)
-        emails (db/get-received-emails receiver)
-        transformed-emails (mapper/transform-emails emails)]
-    (let [classified-emails (map (fn [email]
-                                   (let [email-body (str (:subject email) " " (:content email))
-                                         prediction (nb/predict email-body @preparator/classifier-state)
-                                         spam (= prediction "spam")]
-                                     (assoc email :spam spam)))
-                                 transformed-emails)]
-      {:status 200
-       :body classified-emails})))
+        transformed-emails (mapper/transform-emails (db/get-received-emails receiver))
+        classified-emails (map (fn [email]
+                                 (let [email-body (str (:subject email) " " (:content email))
+                                       prediction (nb/predict email-body @preparator/classifier-state)
+                                       spam (= prediction "spam")]
+                                   (assoc email :spam spam)))
+                               transformed-emails)]
+    {:status 200
+     :body classified-emails}))
 
 (def app
   (ring/ring-handler
