@@ -11,7 +11,8 @@
    (ring/router
     [["/classify" {:post handlers/classify-email}]
      ["/email/{receiver}" {:get handlers/get-emails-handler}]
-     ["/email" {:post handlers/save-email-handler}]]
+     ["/email" {:post handlers/save-email-handler}]
+     ["/user" {:post handlers/save-user}]]
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
 

@@ -5,7 +5,7 @@
 (def classifier-state (atom nil))
 
 (defn prepare-data []
-  (let [csv-rows (csv/read-csv "C:\\Users\\uros.vesic\\IdeaProjects\\clojure\\bayes-clojure\\dataset.csv")
+  (let [csv-rows (csv/read-csv "dataset.csv")
         shuffled-rows (shuffle csv-rows)
         emails (map :text shuffled-rows)
         labels (map :label shuffled-rows)

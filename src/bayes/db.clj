@@ -18,11 +18,27 @@
 (defn insert [q]
   (j/db-do-prepared mysql-db q))
 
-(defn insert-email [sender receiver subject content]
-  (insert (-> {:insert-into [:email]
-               :columns [:subject :sender :receiver :content]
-               :values [[subject sender receiver content]]}
+(defn get-user-by-email [email]
+  (query (-> (select :*)
+             (from :user)
+             (where [:= :email email])
+             sql/format)))
+
+(defn insert-user [email]
+  (insert (-> {:insert-into [:user]
+               :columns [:email]
+               :values [[email]]}
               (sql/format {:pretty true}))))
+
+(defn insert-email [sender-email receiver-email subject content]
+  (let [sender-result (get-user-by-email sender-email)
+        receiver-result (get-user-by-email receiver-email)
+        sender-id (:id (first sender-result))
+        receiver-id (:id (first receiver-result))]
+    (insert (-> {:insert-into [:email]
+                 :columns [:subject :sender :receiver :content]
+                 :values [[subject sender-id receiver-id content]]}
+                (sql/format {:pretty true})))))
 
 (defn get-received-emails [receiver]
   (query (-> (select :*)

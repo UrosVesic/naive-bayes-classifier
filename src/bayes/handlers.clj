@@ -21,6 +21,15 @@
       {:status 400
        :body {:error "Email data is missing"}})))
 
+(defn save-user [{:keys [body-params]}]
+  (let [{:keys [email]} body-params]
+    (if email
+      (do
+        (db/insert-user email)
+        {:status 201})
+      {:status 400
+       :body {:error "User data is missing"}})))
+
 (defn get-emails-handler [{:keys [path-params]}]
   (let [receiver (:receiver path-params)
         transformed-emails (mapper/transform-emails (db/get-received-emails receiver))
