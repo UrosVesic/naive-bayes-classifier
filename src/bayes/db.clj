@@ -51,15 +51,3 @@
 (-> (select *)
     (from :email)
     sql/format)
-
-(comment
-  (query (-> (select :*)
-             (from :email)
-             (join [:user :u1] [:= :email.receiver :u1.id])
-             (join [:user :u2] [:= :email.sender :u2.id])
-             (where [:= :receiver 2])
-             sql/format))
-  (insert (-> {:insert-into [:email]
-               :columns [:subject :sender :receiver :content]
-               :values [["Congrats" "Smith" "John" "Congrats! You have won a lottery!"]]}
-              (sql/format {:pretty true}))))
