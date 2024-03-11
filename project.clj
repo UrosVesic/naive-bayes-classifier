@@ -11,10 +11,10 @@
                  [metosin/muuntaja "0.6.8"]
                  [org.clojure/java.jdbc "0.7.12"]
                  [mysql/mysql-connector-java "8.0.33"]
-                 [org.testcontainers/mysql "1.19.0"]
-                 [org.testcontainers/testcontainers "1.19.0"]
                  [com.github.seancorfield/honeysql "2.5.1103"]]
   :main ^:skip-aot bayes.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+             :test {:dependencies [[org.testcontainers/mysql "1.19.0"]
+                                   [org.testcontainers/testcontainers "1.19.0"]]}})
