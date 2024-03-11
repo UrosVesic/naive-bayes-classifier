@@ -80,13 +80,15 @@ The application exposes a RESTful API with the following endpoints:
 - `POST /email`
   - **Description:** Accepts email details and inserts the email into the database.
   - **Body:** `{ "sender": "Sender's email", "receiver": "Receiver's email", "subject": "Email subject", "content": "Email content" }`
-  - **Response:** `{
-        "receiver": "uros",
-        "sender": "pera",
-        "subject": "inheritance",
-        "content": "Nigerian prince left you big inheritance, click here to claim!",
-        "spam": true
-    }`
+  - **Response:** `status 201`
+
+    ### User Insertion
+
+- `POST /user`
+  - **Description:** Accepts user details and inserts the user into the database.
+  - **Body:** `{ "email": "User's email adress"}`
+  - **Response:** `status 201`
+
 
 ## Example Usage
 
