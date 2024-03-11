@@ -122,5 +122,14 @@ curl -X POST http://localhost:3000/email \
 -d '{"sender":"janedoe@example.com", "receiver":"johndoe@example.com", "subject":"Meeting Schedule", "content":"Lets schedule the meeting for next Thursday."}'
 ```
 
+## Testing
+### Running Tests
+Tests in this project are designed to verify the functionality of the Naive Bayes Email Classifier, including its API endpoints, classification logic, and interaction with the database. To run the tests, use the following command:
+```sh
+lein test
+```
+
+Testcontainers will automatically start a MySQL container for the tests, and it will be stopped and removed after the tests complete. This provides a consistent and isolated environment for testing database-related functionality.
+
 
 
