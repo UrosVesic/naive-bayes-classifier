@@ -15,4 +15,6 @@
   :main ^:skip-aot bayes.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+             :test {:dependencies [[org.testcontainers/mysql "1.19.0"]
+                                   [org.testcontainers/testcontainers "1.19.0"]]}})
